@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hemi.maze.web.dao.EcBarMapper" >
+  <resultMap id="BaseResultMap" type="com.hemi.maze.web.model.EcBar" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="years" property="years" jdbcType="INTEGER" />
+    <result column="monthes" property="monthes" jdbcType="INTEGER" />
+    <result column="evaporation" property="evaporation" jdbcType="REAL" />
+    <result column="rainfall" property="rainfall" jdbcType="REAL" />
+    <result column="avgtemp" property="avgtemp" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cid, years, monthes, evaporation, rainfall, avgtemp
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hemi.maze.web.model.EcBarExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ec_bar
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ec_bar
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ec_bar
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hemi.maze.web.model.EcBarExample" >
+    delete from ec_bar
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hemi.maze.web.model.EcBar" >
+    insert into ec_bar (cid, years, monthes, 
+      evaporation, rainfall, avgtemp
+      )
+    values (#{cid,jdbcType=INTEGER}, #{years,jdbcType=INTEGER}, #{monthes,jdbcType=INTEGER}, 
+      #{evaporation,jdbcType=REAL}, #{rainfall,jdbcType=REAL}, #{avgtemp,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hemi.maze.web.model.EcBar" >
+    insert into ec_bar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="years != null" >
+        years,
+      </if>
+      <if test="monthes != null" >
+        monthes,
+      </if>
+      <if test="evaporation != null" >
+        evaporation,
+      </if>
+      <if test="rainfall != null" >
+        rainfall,
+      </if>
+      <if test="avgtemp != null" >
+        avgtemp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="years != null" >
+        #{years,jdbcType=INTEGER},
+      </if>
+      <if test="monthes != null" >
+        #{monthes,jdbcType=INTEGER},
+      </if>
+      <if test="evaporation != null" >
+        #{evaporation,jdbcType=REAL},
+      </if>
+      <if test="rainfall != null" >
+        #{rainfall,jdbcType=REAL},
+      </if>
+      <if test="avgtemp != null" >
+        #{avgtemp,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hemi.maze.web.model.EcBarExample" resultType="java.lang.Integer" >
+    select count(*) from ec_bar
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ec_bar
+    <set >
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.years != null" >
+        years = #{record.years,jdbcType=INTEGER},
+      </if>
+      <if test="record.monthes != null" >
+        monthes = #{record.monthes,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaporation != null" >
+        evaporation = #{record.evaporation,jdbcType=REAL},
+      </if>
+      <if test="record.rainfall != null" >
+        rainfall = #{record.rainfall,jdbcType=REAL},
+      </if>
+      <if test="record.avgtemp != null" >
+        avgtemp = #{record.avgtemp,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ec_bar
+    set cid = #{record.cid,jdbcType=INTEGER},
+      years = #{record.years,jdbcType=INTEGER},
+      monthes = #{record.monthes,jdbcType=INTEGER},
+      evaporation = #{record.evaporation,jdbcType=REAL},
+      rainfall = #{record.rainfall,jdbcType=REAL},
+      avgtemp = #{record.avgtemp,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hemi.maze.web.model.EcBar" >
+    update ec_bar
+    <set >
+      <if test="years != null" >
+        years = #{years,jdbcType=INTEGER},
+      </if>
+      <if test="monthes != null" >
+        monthes = #{monthes,jdbcType=INTEGER},
+      </if>
+      <if test="evaporation != null" >
+        evaporation = #{evaporation,jdbcType=REAL},
+      </if>
+      <if test="rainfall != null" >
+        rainfall = #{rainfall,jdbcType=REAL},
+      </if>
+      <if test="avgtemp != null" >
+        avgtemp = #{avgtemp,jdbcType=REAL},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hemi.maze.web.model.EcBar" >
+    update ec_bar
+    set years = #{years,jdbcType=INTEGER},
+      monthes = #{monthes,jdbcType=INTEGER},
+      evaporation = #{evaporation,jdbcType=REAL},
+      rainfall = #{rainfall,jdbcType=REAL},
+      avgtemp = #{avgtemp,jdbcType=REAL}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+
+  <!--  -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ec_bar
+    order by cid
+  </select>
+</mapper>

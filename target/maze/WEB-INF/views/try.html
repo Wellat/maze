@@ -1,0 +1,177 @@
+<h2>01 Linux环境准备</h2>
+<div><span style="color: #888888;"><strong>（本文在win10上使用 VMware12 + Ubuntu14.04）</strong></span></div>
+<div><span style="color: #008000; line-height: 1.5;">&nbsp;</span></div>
+<h3><span style="font-size: 1.17em; line-height: 1.5; color: #339966;">1、JDK安装及相关配置</span></h3>
+<div>
+    <div>
+        <div><strong>参考：</strong><a href="http://blog.csdn.net/sxdtzhaoxinguo/article/details/43731677#">http://blog.csdn.net/sxdtzhaoxinguo/article/details/43731677#</a></div>
+    </div>
+    <div>
+        <div>a)&nbsp;网上下载一个jdk，例如jdk-7u45-linux-x64.tar.gz；保存到downloads目录</div>
+        <div>&nbsp;</div>
+        <div>b)<span style="color: #888888;">（如果存在）</span>先卸载open-jdk</div>
+        <div>
+            <div class="cnblogs_code">
+<pre>java <span style="color: #808080;">-</span><span style="color: #000000;">version
+rpm </span><span style="color: #808080;">-</span>qa <span style="color: #808080;">|</span> grep java</pre>
+            </div>
+            <p><span style="line-height: 1.5;">&nbsp; &nbsp; &nbsp;查找所有安装过的包含字符串java的软件包并卸载</span></p>
+            <div class="cnblogs_code">
+                <pre>rpm <span style="color: #808080;">-</span>e <span style="color: #008080;">--</span><span style="color: #008080;">nodeps 搜索出的文件名</span></pre>
+            </div>
+            <p><span style="line-height: 1.5;">&nbsp;</span></p>
+            <p><span style="line-height: 1.5;">c) 安装</span></p>
+        </div>
+        <div>&nbsp; &nbsp; &nbsp;创建文件夹：</div>
+        <div>
+            <div class="cnblogs_code">
+<pre>hemi<span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">~</span>$ sudo mkdir <span style="color: #808080;">/</span>usr<span style="color: #808080;">/</span>local<span style="color: #808080;">/</span><span style="color: #000000;">web
+hemi</span><span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">~</span>$ sudo mkdir <span style="color: #808080;">/</span>usr<span style="color: #808080;">/</span>local<span style="color: #808080;">/</span>web<span style="color: #808080;">/</span>jdk</pre>
+            </div>
+            <p><img style="line-height: 1.5;" src="file:///D:/Documents/YunNote/data/xqvsxq@163.com/xqvsxq@163.com/1349c2d434a840a8adffc73fb25effc1/untitle.png" alt="" data-media-type="image" data-attr-org-src-id="ED1582AECEFE46F69E953F702BDCC18A" data-attr-org-img-file="file:///D:/Documents/YunNote/data/xqvsxq@163.com/xqvsxq@163.com/1349c2d434a840a8adffc73fb25effc1/untitle.png" />　　将下载好的jdk文件复制到创建的文件夹中： &nbsp; &nbsp;&nbsp;</p>
+        </div>
+        <div>
+            <div class="cnblogs_code">
+                <pre>hemi<span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">~/</span>Downloads$ sudo cp jdk<span style="color: #808080;">-</span>7u67<span style="color: #808080;">-</span>linux<span style="color: #808080;">-</span>i586.tar.gz <span style="color: #808080;">/</span>usr<span style="color: #808080;">/</span>local<span style="color: #808080;">/</span>web<span style="color: #808080;">/</span>jdk</pre>
+            </div>
+            <p><span style="line-height: 1.5;">&nbsp; &nbsp; &nbsp;使用【sudo&nbsp;tar&nbsp;-zxvf&nbsp;文件名】命令解压，例如我要安装在/usr/local/web/jdk目录下，则进入该目录</span></p>
+        </div>
+        <div>
+            <div class="cnblogs_code">
+                <pre>hemi<span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">~</span>$ sudo tar <span style="color: #808080;">-</span>zxvf jdk<span style="color: #808080;">-</span>7u67<span style="color: #808080;">-</span>linux<span style="color: #808080;">-</span>i586.tar.gz</pre>
+            </div>
+            <p><span style="line-height: 1.5;">&nbsp; &nbsp; &nbsp;把解压后的jdk1.7.0_25文件夹重命名为java，以便于书写：</span></p>
+            <div class="cnblogs_code">
+                <pre>hemi<span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">~</span>$ sudo mv jdk1.<span style="color: #800000; font-weight: bold;">7</span>.0_<span style="color: #800000; font-weight: bold;">25</span> java</pre>
+            </div>
+            <p><span style="line-height: 1.5;">&nbsp;</span></p>
+        </div>
+    </div>
+    <div>
+        <div>d) 配置环境变量：</div>
+        <div>
+            <div class="cnblogs_code">
+                <pre>hemi@ubuntu:~$ sudo vi /etc/profile</pre>
+            </div>
+            <p><span style="line-height: 1.5;">&nbsp; &nbsp; &nbsp;在末尾添加：</span></p>
+        </div>
+        <div>
+            <div class="cnblogs_code">
+<pre><span style="color: #000000;">JAVA_HOME=/usr/local/web/jdk/java
+PATH=.:$JAVA_HOME/bin:$PATH
+export JAVA_HOME PATH</span></pre>
+            </div>
+            <p>&nbsp; &nbsp; &nbsp;【注】光标移动到需要添加文字的位置，按键盘上&lsquo;i&rsquo;键进入插入模式，输入内容，如果想退出文本编辑模式，并且保存刚刚编辑的文本，首先点击一下&lsquo;ESC&rsquo;，然后输入&ldquo;：wq&rdquo;这样文本就保存退出了，如果不想保存则按&ldquo;ESC&rdquo;后输入&ldquo;：q！&rdquo;</p>
+        </div>
+    </div>
+    <p>e)&nbsp;执行【<span style="color: #ff0000;">source&nbsp;/etc/profile</span>】使配置生效；</p>
+    <div>
+        <div>f)&nbsp;最后执行<span style="color: #ff0000;">java -version</span>&nbsp;命令测试即可</div>
+    </div>
+    <div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+    </div>
+</div>
+<h3><span style="color: #339966;">2、Tomcat安装及相关配置</span></h3>
+<div>
+    <div><strong>参考：</strong><a href="http://www.linuxidc.com/Linux/2009-07/21073.htm">http://www.linuxidc.com/Linux/2009-07/21073.htm</a></div>
+    <div>
+        <div>
+            <div>tomcat安装：</div>
+        </div>
+        <div>
+            <div>&nbsp; &nbsp; &nbsp;创建目录：</div>
+            <div>
+                <div class="cnblogs_code">
+                    <pre>hemi<span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">~</span>$ sudo mkdir <span style="color: #808080;">/</span>usr<span style="color: #808080;">/</span>local<span style="color: #808080;">/</span>web<span style="color: #808080;">/</span>tomcat</pre>
+                </div>
+                <p><span style="line-height: 1.5;">&nbsp; &nbsp; &nbsp;将下载好的文件复制到创建的文件夹中：</span></p>
+                <div class="cnblogs_code">
+                    <pre>hemi<span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">~/</span>Downloads$ sudo cp apache<span style="color: #808080;">-</span>tomcat<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">7.0</span>.<span style="color: #800000; font-weight: bold;">69</span>.tar.gz <span style="color: #808080;">/</span>usr<span style="color: #808080;">/</span>local<span style="color: #808080;">/</span>web<span style="color: #808080;">/</span>tomcat</pre>
+                </div>
+                <p><span style="line-height: 1.5;">&nbsp; &nbsp; &nbsp;解压到该文件夹下：</span></p>
+                <div class="cnblogs_code">
+                    <pre>hemi<span style="color: #008000;">@ubuntu</span>:<span style="color: #808080;">/</span>usr<span style="color: #808080;">/</span>local<span style="color: #808080;">/</span>web<span style="color: #808080;">/</span>tomcat<span style="color: #808080;">/</span>$ sudo tar <span style="color: #808080;">-</span>zxvf apache<span style="color: #808080;">-</span>tomcat<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">7.0</span>.<span style="color: #800000; font-weight: bold;">69</span>.tar.gz</pre>
+                </div>
+                <p><span style="line-height: 1.5;">&nbsp; &nbsp; &nbsp;修改tomcat下bin中的catalina.sh文件，在文件开头注释后插入：&nbsp;</span></p>
+                <div class="cnblogs_code">
+                    <pre>JAVA_HOME<span style="color: #808080;">="</span><span style="color: #808080;">/</span>usr<span style="color: #808080;">/</span>local<span style="color: #808080;">/</span>web<span style="color: #808080;">/</span>jdk<span style="color: #808080;">/</span>java"</pre>
+                </div>
+                <p><strong style="line-height: 1.5;">【tomcat</strong><strong style="line-height: 1.5;">相关操作】</strong><span style="line-height: 1.5;">：</span></p>
+            </div>
+        </div>
+        <p>　　首先，进入Tomcat下的bin目录，例如：cd&nbsp;/usr/local/web/tomcat/bin</p>
+        <p>　　启动Tomcat：./startup.sh&nbsp;</p>
+        <p>　　关闭Tomcat：./shutdown.sh</p>
+        <p>　　查看Tomcat是否关闭：<span style="color: #ff0000;">ps&nbsp;-ef|grep&nbsp;java</span>，若信息较多表示未关闭，反之已关闭。</p>
+        <div>
+            <div>&nbsp; &nbsp; &nbsp; &nbsp;tomcat查看日志：<span style="color: #ff0000;">tail&nbsp;-f&nbsp;catalina.out</span>&nbsp;(catalina.out位于logs目录下，tail表示尾部查看，-f表示动态查看，也可以&nbsp;&nbsp;tail&nbsp;-100f&nbsp;catalina.out&nbsp;表示动态查看最后100行日志)</div>
+        </div>
+    </div>
+    <div><strong>&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: #ff0000;">轻松启动，关闭，重启tomcat</span></strong></div>
+    <div>
+        <div class="cnblogs_code">
+            <pre>sudo vi <span style="color: #808080;">~/</span>.bashrc</pre>
+        </div>
+        <p><span style="line-height: 1.5;">　　在~/.bashrc文件里添加引用:</span></p>
+    </div>
+    <div>
+        <div class="cnblogs_code">
+<pre>alias starttomcat<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">sudo /usr/local/web/tomcat/at/bin/startup.sh</span><span style="color: #ff0000;">'</span><span style="color: #000000;">
+alias shutdowntomcat</span><span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">sudo /usr/local/web/tomcat/at/bin/shutdown.sh</span><span style="color: #ff0000;">'</span><span style="color: #000000;">
+alias restarttomcat</span><span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">shutdowntomcat &amp;&amp; starttomcat</span><span style="color: #ff0000;">'</span></pre>
+        </div>
+        <p><span style="line-height: 1.5;">　　然后执行&darr;使配置生效</span></p>
+    </div>
+    <div>
+        <div class="cnblogs_code">
+            <pre>source <span style="color: #808080;">~/</span>.bashrc</pre>
+        </div>
+        <p><strong style="line-height: 1.5;">&nbsp;</strong></p>
+    </div>
+
+</div>
+<h3><span style="color: #339966;">3、Mysql安装及相关配置</span></h3>
+<div>
+    <div>
+        <div>a) 如果已存在，先卸载</div>
+        <div>
+            <div class="cnblogs_code">
+<pre>rpm <span style="color: #808080;">-</span>qa <span style="color: #808080;">|</span><span style="color: #000000;"> grep mysql
+rpm </span><span style="color: #808080;">-</span>e <span style="color: #008080;">--</span><span style="color: #008080;">nodeps 搜索出的文件名</span></pre>
+            </div>
+            <p><span style="line-height: 1.5;">&nbsp;</span><span style="line-height: 1.5;">b) ubuntu上安装mysql非常简单只需要3条命令就可以完成。</span></p>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="cnblogs_code">
+<pre><span style="color: #800000; font-weight: bold;">1</span>. sudo apt<span style="color: #808080;">-</span>get install mysql<span style="color: #808080;">-</span><span style="color: #000000;">server
+</span><span style="color: #800000; font-weight: bold;">2</span>. sudo apt<span style="color: #808080;">-</span>get isntall mysql<span style="color: #808080;">-</span><span style="color: #000000;">client
+</span><span style="color: #800000; font-weight: bold;">3</span>. sudo apt<span style="color: #808080;">-</span>get install libmysqlclient<span style="color: #808080;">-</span>dev</pre>
+            </div>
+            <p><span style="line-height: 1.5;">　　安装过程中会提示设置密码什么的，注意设置了不要忘了，安装完成之后可以使用如下命令来检查是否安装成功：</span></p>
+        </div>
+        <div>
+            <div class="cnblogs_code">
+                <pre>sudo netstat <span style="color: #808080;">-</span>tap <span style="color: #808080;">|</span> grep mysql</pre>
+            </div>
+            <p><span style="line-height: 1.5;">　　通过上述命令检查之后，如果看到有mysql 的socket处于 listen 状态则表示安装成功。</span></p>
+        </div>
+        <div>　　登陆mysql数据库可以通过如下命令：</div>
+        <div>
+            <div class="cnblogs_code">
+                <pre>mysql <span style="color: #808080;">-</span>u root <span style="color: #808080;">-</span>p</pre>
+            </div>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+</div>
+
+<h2>02 项目部署及启动&nbsp;</h2>
+<p><span style="font-size: 14px; line-height: 1.5;">将开发好的项目war包，拷贝到tomcat的</span><span style="color: #ff0000;">webapps</span><span style="font-size: 14px; line-height: 1.5;">目录下，然后启动tomcat服务器即可。</span></p>
+<div>访问地址：http://localhost:8080/项目名（war文件名）</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
