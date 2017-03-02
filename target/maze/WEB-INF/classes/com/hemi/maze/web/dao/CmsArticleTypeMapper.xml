@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hemi.maze.web.dao.CmsArticleTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.hemi.maze.web.model.CmsArticleType" >
+    <id column="tyid" property="tyid" jdbcType="INTEGER" />
+    <result column="tyname" property="tyname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tyid, tyname
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hemi.maze.web.model.CmsArticleTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cms_article_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_article_type
+    where tyid = #{tyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_article_type
+    where tyid = #{tyid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hemi.maze.web.model.CmsArticleTypeExample" >
+    delete from cms_article_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hemi.maze.web.model.CmsArticleType" >
+    insert into cms_article_type (tyid, tyname)
+    values (#{tyid,jdbcType=INTEGER}, #{tyname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hemi.maze.web.model.CmsArticleType" >
+    insert into cms_article_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tyid != null" >
+        tyid,
+      </if>
+      <if test="tyname != null" >
+        tyname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tyid != null" >
+        #{tyid,jdbcType=INTEGER},
+      </if>
+      <if test="tyname != null" >
+        #{tyname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hemi.maze.web.model.CmsArticleTypeExample" resultType="java.lang.Integer" >
+    select count(*) from cms_article_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cms_article_type
+    <set >
+      <if test="record.tyid != null" >
+        tyid = #{record.tyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tyname != null" >
+        tyname = #{record.tyname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cms_article_type
+    set tyid = #{record.tyid,jdbcType=INTEGER},
+      tyname = #{record.tyname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hemi.maze.web.model.CmsArticleType" >
+    update cms_article_type
+    <set >
+      <if test="tyname != null" >
+        tyname = #{tyname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tyid = #{tyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hemi.maze.web.model.CmsArticleType" >
+    update cms_article_type
+    set tyname = #{tyname,jdbcType=VARCHAR}
+    where tyid = #{tyid,jdbcType=INTEGER}
+  </update>
+</mapper>

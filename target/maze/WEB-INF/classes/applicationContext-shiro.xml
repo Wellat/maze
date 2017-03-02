@@ -31,7 +31,7 @@
                 /rest/view/rain.html = anon
                 /rest/view/funnel.html = anon
                 <!-- 其他资源需要认证 -->
-                /** = authc
+                /** = anon
             </value>
         </property>
     </bean>

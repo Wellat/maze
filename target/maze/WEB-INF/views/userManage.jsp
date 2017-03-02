@@ -275,7 +275,7 @@
 
 <!--ADD NEW BEGIN-->
 <div class="col-md-3"></div>
-<form class="col-md-6" id="addForm" method="post" style="display: none;">
+<form class="col-md-6" id="addForm" method="post" action="rest/form/addUser" style="display: none;">
     <h3>添加用户</h3>
     <p class="hint">
         请填写以下信息:
@@ -311,8 +311,8 @@
 
     <div class="form-actions">
         <a type="button" id="add-back-btn" class="btn btn-default" >返 回</a>
-        <input type="button" id="add-submit-btn" class="btn btn-success uppercase pull-right"  onclick="save();" value="保 存"/>
-        <%--<a type="submit" id="add-submit-btn" class="btn btn-success uppercase pull-right">保 存</a>--%>
+        <%--<input type="button" id="add-submit-btn" class="btn btn-success uppercase pull-right"  onclick="save();" value="保 存"/>--%>
+        <a type="button" id="add-submit-btn" class="btn btn-success uppercase pull-right">保 存</a>
     </div>
 </form>
 <div class="col-md-3"></div>
@@ -327,13 +327,16 @@
         jQuery('.hemitable').show();
         jQuery('#addForm').hide();
     });
+    jQuery('#add-submit-btn').click(function() {
+        jQuery('#addForm').submit();
+    });
 </script>
 
 <script src="assets/admin/pages/scripts/table-managed.js"></script>
-<script src="hemi/js/adduser.js"></script>
+<%--<script src="hemi/js/adduser.js"></script>--%>
 <script>
     jQuery(document).ready(function() {
         TableManaged.init();
-        AddUser.init();
+//        AddUser.init();
     });
 </script>

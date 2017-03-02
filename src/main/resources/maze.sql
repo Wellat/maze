@@ -10,10 +10,66 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-12-30 17:25:27
+Date: 2017-02-26 20:24:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for cms_article
+-- ----------------------------
+DROP TABLE IF EXISTS `cms_article`;
+CREATE TABLE `cms_article` (
+  `aid` int(11) NOT NULL,
+  `typeid` int(11) DEFAULT NULL,
+  `tagid1` int(11) DEFAULT NULL,
+  `tagid2` int(11) DEFAULT NULL,
+  `tagid3` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` text,
+  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `is_check` int(11) DEFAULT NULL,
+  `is_show` int(11) DEFAULT NULL,
+  `allow_comment` int(11) DEFAULT NULL,
+  `comment_count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`aid`),
+  KEY `article_type` (`typeid`),
+  KEY `article_tag1` (`tagid1`),
+  CONSTRAINT `article_tag1` FOREIGN KEY (`tagid1`) REFERENCES `cms_article_tag` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `article_type` FOREIGN KEY (`typeid`) REFERENCES `cms_article_type` (`tyid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of cms_article
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cms_article_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `cms_article_tag`;
+CREATE TABLE `cms_article_tag` (
+  `tid` int(11) NOT NULL AUTO_INCREMENT,
+  `tname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`tid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of cms_article_tag
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cms_article_type
+-- ----------------------------
+DROP TABLE IF EXISTS `cms_article_type`;
+CREATE TABLE `cms_article_type` (
+  `tyid` int(11) NOT NULL,
+  `tyname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`tyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of cms_article_type
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for ec_bar

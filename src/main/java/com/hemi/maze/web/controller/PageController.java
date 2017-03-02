@@ -61,5 +61,9 @@ public class PageController {
      */
     @RequestMapping("/echart")
     public String showCharts() { return "showcharts"; }
-
+    /**
+     * 新建文章
+     */
+    @RequestMapping("/addArticle")
+    public String addArticle() { return "articleAdd"; }
 }

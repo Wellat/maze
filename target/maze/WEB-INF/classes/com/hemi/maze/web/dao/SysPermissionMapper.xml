@@ -277,5 +277,6 @@
   <select id="selectPermissionsByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT p.* FROM sys_permission p LEFT JOIN sys_role_permission rp ON rp.sys_permission_id = p.id
     WHERE rp.sys_role_id = #{id,jdbcType=VARCHAR}
+    ORDER BY p.id
   </select>
 </mapper>

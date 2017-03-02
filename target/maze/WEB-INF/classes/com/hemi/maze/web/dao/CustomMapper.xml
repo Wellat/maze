@@ -39,7 +39,9 @@
         sys_role_id
         FROM
         sys_user_role
-        WHERE sys_user_id = #{id}))
+        WHERE sys_user_id = #{id})
+        )
+        ORDER BY id
     </select>
 
 </mapper>

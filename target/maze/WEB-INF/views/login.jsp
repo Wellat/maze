@@ -59,7 +59,7 @@
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
     <form class="login-form" action="rest/user/login" method="post">
-        <h3 class="form-title">Sign In</h3>
+        <h3 class="form-title">登&nbsp;&nbsp;录</h3>
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
 			<span>
@@ -77,12 +77,12 @@
                    placeholder="Password" name="password" value="123456"/>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-success uppercase">Login</button>
+            <button type="submit" class="btn btn-success uppercase">登&nbsp;录</button>
             <label class="rememberme check">
-                <input type="checkbox" name="remember" value="1"/>Remember </label>
-            <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                <input type="checkbox" name="remember" value="1"/>记住我 </label>
+            <a href="javascript:;" id="forget-password" class="forget-password">忘记密码?</a>
         </div>
-        <div class="login-options">
+<%--        <div class="login-options">
             <h4>Or login with</h4>
             <ul class="social-icons">
                 <li>
@@ -98,10 +98,10 @@
                     <a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>
                 </li>
             </ul>
-        </div>
+        </div>--%>
         <div class="create-account">
             <p>
-                <a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>
+                <a href="javascript:;" id="register-btn" class="uppercase">注&nbsp;&nbsp;册</a>
             </p>
         </div>
     </form>

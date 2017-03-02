@@ -67,14 +67,14 @@ public class UserController {
             ActiveUser activeUser = new ActiveUser();
             String userId = authUserInfo.getId();
             List<SysPermission> resultList = userService.findMenuListByUserId(userId);
-            List<SysPermission> permissions = userService.findMenuListByUserId(userId);
+            List<SysPermission> permissions = userService.findPermissionListByUserId(userId);
 
             activeUser.setUserid(userId);//id
             activeUser.setUsername(authUserInfo.getUsername());
             activeUser.setMenus(resultList);
             activeUser.setPermissions(permissions);
             activeUser.setUsercode(authUserInfo.getUsercode());//登陆账号
-
+            request.setAttribute("userId",userId);
             request.getSession().setAttribute("userInfo", activeUser);
         } catch (AuthenticationException e) {
             // 身份验证失败

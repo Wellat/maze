@@ -40,8 +40,6 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="funnel">
-
-        </table>
+        <table tableName="cms_article"></table>
     </context>
 </generatorConfiguration>

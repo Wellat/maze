@@ -37,6 +37,7 @@ public class FormController {
 
     @RequestMapping("/addUser")
     public Object addUser(SysUser user, HttpServletRequest request){
+        System.out.println("-----------addUserController----------------");
         Map<String, Object> resultMap = new HashMap<String, Object>();
         UserInfo userInfo = new UserInfo();
         SysUserRole userRole = new SysUserRole();
@@ -55,10 +56,10 @@ public class FormController {
         userInfo.setUserRole(userRole);
         if(tableService.addUserAndRole(userInfo) == 1){
             resultMap.put("ret", "success");
-            resultMap.put("msg", "保存成功");
+            resultMap.put("msg", "保存成功!");
         }else{
             resultMap.put("ret", "error");
-            resultMap.put("msg", "保存失败");
+            resultMap.put("msg", "保存失败!");
         }
         return resultMap;
     }
